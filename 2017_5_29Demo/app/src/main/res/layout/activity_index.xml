@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="cn.xiaoxige.a2017_5_29demo.Index">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray" />
+
+            <RadioGroup
+                android:id="@+id/rgGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                android:paddingBottom="6dp"
+                android:paddingTop="6dp">
+
+                <RadioButton
+                    android:id="@+id/one"
+                    style="@style/mainMenuStyle"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:text="one" />
+
+                <RadioButton
+                    android:id="@+id/two"
+                    style="@style/mainMenuStyle"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:text="two" />
+
+                <RadioButton
+                    style="@style/mainMenuStyle"
+                    android:visibility="invisible" />
+
+                <RadioButton
+                    android:id="@+id/three"
+                    style="@style/mainMenuStyle"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:text="three" />
+
+                <RadioButton
+                    android:id="@+id/fore"
+                    style="@style/mainMenuStyle"
+                    android:drawableTop="@mipmap/ic_launcher"
+                    android:text="four" />
+            </RadioGroup>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCenter"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/selector_point" />
+
+</FrameLayout>
