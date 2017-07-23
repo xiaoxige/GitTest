@@ -1,0 +1,30 @@
+package cn.xiaoxige.a2017_5_27demo;
+
+import android.app.Application;
+
+import com.luck.picture.lib.model.FunctionConfig;
+import com.luck.picture.lib.model.FunctionOptions;
+import com.luck.picture.lib.model.PictureConfig;
+
+/**
+ * Created by 小稀革 on 2017/5/29.
+ */
+
+public class MyApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        FunctionOptions options = new FunctionOptions.Builder()
+                .setType(FunctionConfig.TYPE_IMAGE)
+                .setEnablePreview(true)
+                .setGif(false)
+                .setNumComplete(true)
+                .setShowCamera(true)
+                .setEnableCrop(true)
+                .setMaxSelectNum(50)
+                .setCompress(true)
+                .setSelectMode(FunctionConfig.MODE_MULTIPLE)
+                .create();
+        PictureConfig.getInstance().init(options);
+    }
+}

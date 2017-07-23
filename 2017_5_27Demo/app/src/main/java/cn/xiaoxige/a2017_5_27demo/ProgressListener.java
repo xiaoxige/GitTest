@@ -1,0 +1,11 @@
+package cn.xiaoxige.a2017_5_27demo;
+
+/**
+ * Created by 小稀革 on 2017/5/28.
+ */
+
+public interface ProgressListener {
+
+    void progress(long all, long position, float progress);
+
+}
