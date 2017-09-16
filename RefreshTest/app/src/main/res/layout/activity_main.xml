@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.xiaoxige.refreshtest.RefreshStickyNavLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/topView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@android:color/holo_red_dark"
+        android:orientation="vertical">
+
+        <TextView
+            android:padding="10dp"
+            android:id="@+id/tvAdd"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="添加Item" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+
+</cn.xiaoxige.refreshtest.RefreshStickyNavLayout>
