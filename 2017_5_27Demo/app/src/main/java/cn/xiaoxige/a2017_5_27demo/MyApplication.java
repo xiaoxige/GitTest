@@ -20,10 +20,10 @@ public class MyApplication extends Application {
                 .setGif(false)
                 .setNumComplete(true)
                 .setShowCamera(true)
-                .setEnableCrop(true)
+                .setEnableCrop(false)
                 .setMaxSelectNum(50)
                 .setCompress(true)
-                .setSelectMode(FunctionConfig.MODE_MULTIPLE)
+                .setSelectMode(FunctionConfig.MODE_SINGLE)
                 .create();
         PictureConfig.getInstance().init(options);
     }

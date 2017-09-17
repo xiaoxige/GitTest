@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -107,6 +108,11 @@ public class MainActivity extends RxActivity {
             @Override
             public void onSelectSuccess(LocalMedia localMedia) {
                 Log.e("TAG", "单选" + localMedia.getPath() + ", " + localMedia.getCompressPath());
+                try {
+                    publicImg(localMedia.getCompressPath());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -148,7 +154,7 @@ public class MainActivity extends RxActivity {
         if (requestCode == PERMISSIONCODE) {
             if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 //                publishImg();
-                text();
+//                text();
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -161,6 +167,39 @@ public class MainActivity extends RxActivity {
         if (progress == 100) {
             tvProgress.setText("完成");
         }
+    }
+
+    private void publicImg(final String path) throws Exception {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                final Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("http://116.196.92.172:4869/")
+                        .addConverterFactory(new StringConverterFactory())
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                final File file = new File(path);
+                final UpImageApi upImageApi = retrofit.create(UpImageApi.class);
+                RequestBody body = RequestBody.create(MediaType.parse("image/" + "png"), file);
+
+                try {
+
+                    Call<ResponseBody> responseBodyCall = upImageApi.uploadImage(body);
+                    Response<ResponseBody> response = responseBodyCall.execute();
+                    String string = response.body().string();
+                    Log.e("TAG", "string = " + string);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+
+
     }
 
     private void publishImg() {
@@ -213,5 +252,16 @@ public class MainActivity extends RxActivity {
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+    public String getFileSuffix(String filePath) {
+        try {
+            String fileType = filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());
+            return fileType;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+
     }
 }

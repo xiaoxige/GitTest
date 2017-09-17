@@ -1,8 +1,10 @@
 package cn.xiaoxige.a2017_5_27demo;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -16,4 +18,7 @@ public interface UpImageApi {
     @Multipart
     @POST("/FileUpload/FileUploadServlet")
     Call<ResponseBody> uploadImg(@Part MultipartBody.Part part) throws Exception;
+
+    @POST("/upload")
+    Call<ResponseBody> uploadImage(@Body RequestBody file) throws Exception;
 }
