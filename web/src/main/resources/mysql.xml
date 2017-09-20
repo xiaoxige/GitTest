@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.api.TestUserApi">
+
+    <select id="getTestUserById" resultType="main.bean.TestUserEntity">
+      select * from test_user where user_id = #{id}
+    </select>
+
+    <insert id="insetTestUser"
+            parameterType="main.api.TestUserApi"
+            useGeneratedKeys="true"
+            keyProperty="userEntity.user_id">
+
+        insert into test_user(user_name, user_sex, user_age, user_desc)
+        VALUES (
+        #{userEntity.user_name}, #{userEntity.user_sex},
+        #{userEntity.user_age}, #{userEntity.user_desc}
+        )
+
+    </insert>
+
+
+</mapper>
