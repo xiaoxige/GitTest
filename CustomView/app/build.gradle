@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "cn.xiaoxige.customview"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders =
+                [APP_NAME: globalConfiguration.getAt("app_name")]
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("../xiaoxige.jks")
+            storePassword "zhuxiaoan"
+            keyAlias "xiaoxige"
+            keyPassword "zhuxiaoan"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (variant.buildType.name.equals('release')) {
+                //生成apk名字的格式：Channel1.0.0_2016-06-22_baidu.apk
+                //可自定义自己想要生成的格式
+                def fileName = "xiaoxige_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+
+    productFlavors {
+        baidu {}
+        _91 {}
+        wandoujia {}
+        xiaomi {}
+    }
+//批量处理
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [MTA_CHANNEL_VALUE: name]
+    }
+}
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "com.android.support:appcompat-v7:${rootProject.ext.appcompatVersion}"
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-scalars:+'
+    compile 'com.squareup.retrofit2:converter-gson:+'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.6'
+    compile 'com.trello.rxlifecycle2:rxlifecycle:2.2.0'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.0'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.0'
+    compile 'com.facebook.fresco:fresco:1.5.0'
+    compile 'com.android.support:multidex:+'
+    compile ("com.github.hotchemi:permissionsdispatcher:3.0.1")
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.0.1"
+}
