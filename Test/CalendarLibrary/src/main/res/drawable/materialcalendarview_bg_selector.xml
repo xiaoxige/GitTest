@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@drawable/materialcalendarview_grey_border_gray" app:state_disable="true" />
+    <item android:drawable="@drawable/materialcalendarview_grey_bg_green" app:state_selectable="true" />
+    <item android:drawable="@drawable/materialcalendarview_grey_board_green" app:state_boardable="true" />
+    <item android:drawable="@drawable/materialcalendarview_grey_border_white" />
+</selector>

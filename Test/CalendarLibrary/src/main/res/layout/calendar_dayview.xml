@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvDay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@android:color/background_dark"
+        tools:text="0" />
+
+
+    <TextView
+        android:id="@+id/tvDescNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/materialcalendar_dayview_desc_bg_shape"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="99"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="10sp" />
+
+
+</FrameLayout>

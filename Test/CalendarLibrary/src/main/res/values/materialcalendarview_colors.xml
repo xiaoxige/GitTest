@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="materialcalendarview_sample_primary">#0093FF</color>
+    <color name="materialcalendarview_sample_accent">#006BBA</color>
+    <color name="materialcalendarview_green_abc">#90c53e</color>
+    <color name="materialcalendarview_gray_dcdc">#dcdcdc</color>
+
+    <color name="materialcalendarview_color_default">#000000</color>
+    <color name="materialcalendarview_color_disable">#55000000</color>
+    <!--<color name="materialcalendarview_color_select">#53b1e2</color>-->
+    <color name="materialcalendarview_today_color_notselect">#000000</color>
+    <color name="materialcalendarview_color_select">#53b1e2</color>
+    <color name="materialcalendarview_color_grey_bg">#f2f2f2</color>
+    <color name="materialcalendarview_color_grey_border">#33000000</color>
+    <color name="materialcalendarview_color_select_bg">@color/materialcalendarview_green_abc</color>
+    <color name="materialcalendarview_color_select_board">@color/materialcalendarview_green_abc</color>
+</resources>
