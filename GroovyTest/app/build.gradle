@@ -89,8 +89,15 @@ task('three', dependsOn: two) << {
     }
 }
 
+xiaoxigetask {}.dependsOn 'three'
 
+xiaoxigetask {}.doFirst {
+    println('first xiaoxigetask')
+}
 
+xiaoxigetask {}.doLast {
+    println('doLast xiaoxigetask')
+}
 
 
 
