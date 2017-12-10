@@ -91,7 +91,7 @@ task('three', dependsOn: two) << {
 
 xiaoxigetask {}.dependsOn 'three'
 
-xiaoxigetask {}.dependsOn 'preBuild'
+xiaoxigetask {}.dependsOn 'assemble'
 
 xiaoxigetask {}.doFirst {
     println('first xiaoxigetask')
