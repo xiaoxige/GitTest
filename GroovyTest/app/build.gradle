@@ -29,6 +29,7 @@ xiaoxige {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':testlibrary')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -91,7 +92,7 @@ task('three', dependsOn: two) << {
 
 xiaoxigetask {}.dependsOn 'three'
 
-xiaoxigetask {}.dependsOn 'assemble'
+xiaoxigetask {}.dependsOn ':app:assemble'
 
 xiaoxigetask {}.doFirst {
     println('first xiaoxigetask')
