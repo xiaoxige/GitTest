@@ -1,5 +1,6 @@
-package cn.xiaoxige.plugin
+package cn.xiaoxige.plugin.plugin
 
+import cn.xiaoxige.plugin.extension.Xiaoxige
 import cn.xiaoxige.plugin.task.XiaoxigeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project

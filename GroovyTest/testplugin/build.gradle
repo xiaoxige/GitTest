@@ -10,7 +10,7 @@ dependencies {
 
 //group和version在后面使用自定义插件的时候会用到
 group = 'cn.xiaoxige.plugin'
-version = '1.0.1'
+version = '1.0.2'
 
 uploadArchives {
     repositories {
