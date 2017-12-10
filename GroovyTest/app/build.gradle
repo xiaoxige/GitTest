@@ -1,0 +1,99 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "cn.xiaoxige.groovytest"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            println("signingConfig")
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+}
+
+
+
+def success = { def msg ->
+    println('success -> ' + msg)
+}
+
+
+
+def error = { def msg ->
+    println('error -> ' + msg)
+}
+
+def add = { def x, def y ->
+    println("Add Method")
+    x + y
+}
+
+def xiaoxige = { def x, def y, Closure closure ->
+    def value = closure.call(x, y)
+    return value
+}
+
+def net = { def b, Closure closureSuccess, Closure closureError ->
+    if (b) {
+        closureSuccess.call('Yes')
+    } else {
+        closureError.call('No')
+    }
+}
+
+
+tasks.create('one') << {
+    println 'one'
+    def sum = xiaoxige(1, 2, add)
+    println(sum)
+
+    net(true, success, error)
+    net(false, success, error)
+
+}
+
+task('two', dependsOn: one) << {
+    println('two')
+}
+
+task('three', dependsOn: two) << {
+    List list = ['one', 'two', 'three']
+    list.each { value ->
+        println(value)
+    }
+}
+
+
+
+
+
+
+
+
+
