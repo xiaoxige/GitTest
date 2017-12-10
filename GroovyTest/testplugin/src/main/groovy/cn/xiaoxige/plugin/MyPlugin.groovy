@@ -1,7 +1,8 @@
 package cn.xiaoxige.plugin
 
+import cn.xiaoxige.plugin.task.XiaoxigeTask
 import org.gradle.api.Plugin
-import org.gradle.api.Project;
+import org.gradle.api.Project
 
 /**
  * Created by zhuxiaoan on 2017/12/10.
@@ -14,5 +15,7 @@ public class MyPlugin implements Plugin<Project> {
         println('---------------------')
         println('--------begin--------')
         println('---------------------')
+        project.extensions.create("xiaoxige", Xiaoxige)
+        project.tasks.create('xiaoxigetask', XiaoxigeTask)
     }
 }

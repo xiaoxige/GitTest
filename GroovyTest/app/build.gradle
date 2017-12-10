@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'cn.xiaoxige.plugin'
+//apply plugin: 'cn.xiaoxige.plugin'
 
 android {
     compileSdkVersion 25
@@ -21,6 +21,11 @@ android {
         }
     }
 }
+
+//xiaoxige {
+//    version '1.0.0'
+//    name 'xiaoxige'
+//}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
