@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'cn.xiaoxige.plugin'
 
 android {
     compileSdkVersion 25
@@ -12,16 +13,10 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    signingConfigs {
-        release {
-            println("signingConfig")
-        }
-    }
 
     buildTypes {
         release {
             minifyEnabled false
-            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
