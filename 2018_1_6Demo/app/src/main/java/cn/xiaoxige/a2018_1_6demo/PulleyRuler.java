@@ -78,6 +78,8 @@ public class PulleyRuler extends View {
     private OverScroller mScroller;
     private GestureDetector mDetector;
 
+    private OnRuleCallback mCallback;
+
     public PulleyRuler(Context context) {
         this(context, null);
     }
@@ -187,6 +189,7 @@ public class PulleyRuler extends View {
         drawCorePoint(canvas);
         drawRule(canvas);
 
+        adjustmentProgress();
     }
 
     @Override
@@ -252,6 +255,15 @@ public class PulleyRuler extends View {
         mEndPoint = mStartingPoint + (mEndScale - mBgnScale) * mScaleSpacing / mCompanyScale;
     }
 
+    private void adjustmentProgress() {
+        int dis = mViewCore - mStartingPoint;
+        int progress = dis / mScaleSpacing;
+        changeRulePosition(mViewCore - progress * mScaleSpacing);
+        if (mCallback != null) {
+            mCallback.ruleChanged(PulleyRuler.this, (progress * mCompanyScale + mBgnScale));
+        }
+    }
+
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
@@ -302,5 +314,9 @@ public class PulleyRuler extends View {
             changeRulePosition(mScroller.getCurrX());
             invalidate();
         }
+    }
+
+    public interface OnRuleCallback {
+        void ruleChanged(View v, int progress);
     }
 }
