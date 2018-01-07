@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -73,6 +74,8 @@ public class PulleyRuler extends View {
     private int mCompanyHeight;
     private float mPeakProportion;
     private float mCompanyProportion;
+
+    private GestureDetector mDetector;
 
     public PulleyRuler(Context context) {
         this(context, null);
@@ -191,19 +194,14 @@ public class PulleyRuler extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
+//        mDetector.onTouchEvent(event);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mStartX = event.getX();
                 break;
             case MotionEvent.ACTION_MOVE:
                 float endX = event.getX();
-                changeRulePositionByDis((int) (endX - mStartX));
-                if (mStartingPoint >= mViewCore) {
-                    changeRulePosition(mViewCore);
-                }
-                if (mStartingPoint <= mViewCore - mRuleWidth) {
-                    changeRulePosition(mViewCore - mRuleWidth);
-                }
+                changeRulePosition(mStartingPoint + (int) (endX - mStartX));
                 mStartX = endX;
                 invalidate();
                 break;
@@ -213,11 +211,21 @@ public class PulleyRuler extends View {
         return true;
     }
 
+    /**
+     * 指针
+     *
+     * @param canvas
+     */
     private void drawCorePoint(Canvas canvas) {
         canvas.drawLine(mViewCore, 0
                 , mViewCore, mBottomLine, mCorePointPaint);
     }
 
+    /**
+     * 尺子
+     *
+     * @param canvas
+     */
     private void drawRule(Canvas canvas) {
         Paint paint;
         for (int scale = mBgnScale, point = mStartingPoint;
@@ -229,6 +237,7 @@ public class PulleyRuler extends View {
                 canvas.drawLine(point, mBottomLine - mPeakLineHeight,
                         point, mBottomLine,
                         paint);
+                drawRuleNum(canvas, 0, 0);
             } else {
                 canvas.drawLine(point, mBottomLine - mCompanyHeight,
                         point, mBottomLine,
@@ -241,13 +250,20 @@ public class PulleyRuler extends View {
 
     }
 
-    private void changeRulePosition(int ruleBgn) {
-        mStartingPoint = ruleBgn;
-        changeRulePositionByDis(0);
+    /**
+     * 峰值数字
+     *
+     * @param canvas
+     * @param x
+     * @param y
+     */
+    private void drawRuleNum(Canvas canvas, int x, int y) {
+
     }
 
-    private void changeRulePositionByDis(int disX) {
-        mStartingPoint += disX;
+    private void changeRulePosition(int ruleBgn) {
+        ruleBgn = Math.min(mViewCore, Math.max(ruleBgn, mViewCore - mRuleWidth));
+        mStartingPoint = ruleBgn;
         mEndPoint = mStartingPoint + (mEndScale - mBgnScale) * mScaleSpacing / mCompanyScale;
     }
 
