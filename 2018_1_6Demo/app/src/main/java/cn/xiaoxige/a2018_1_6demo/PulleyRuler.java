@@ -197,14 +197,12 @@ public class PulleyRuler extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 float endX = event.getX();
-                mStartingPoint += (int) (endX - mStartX);
-                mEndPoint = mStartingPoint + (mEndScale - mBgnScale) * mScaleSpacing / mCompanyScale;
+                changeRulePositionByDis((int) (endX - mStartX));
                 if (mStartingPoint >= mViewCore) {
-                    mStartingPoint = mViewCore;
+                    changeRulePosition(mViewCore);
                 }
                 if (mStartingPoint <= mViewCore - mRuleWidth) {
-                    mStartingPoint = mViewCore - mRuleWidth;
-                    mEndPoint = mStartingPoint + (mEndScale - mBgnScale) * mScaleSpacing / mCompanyScale;
+                    changeRulePosition(mViewCore - mRuleWidth);
                 }
                 mStartX = endX;
                 invalidate();
@@ -242,6 +240,15 @@ public class PulleyRuler extends View {
 
     }
 
+    private void changeRulePosition(int ruleBgn) {
+        mStartingPoint = ruleBgn;
+        changeRulePositionByDis(0);
+    }
+
+    private void changeRulePositionByDis(int disX) {
+        mStartingPoint += disX;
+        mEndPoint = mStartingPoint + (mEndScale - mBgnScale) * mScaleSpacing / mCompanyScale;
+    }
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
