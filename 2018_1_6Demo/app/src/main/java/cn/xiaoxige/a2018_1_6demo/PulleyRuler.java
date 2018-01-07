@@ -108,12 +108,17 @@ public class PulleyRuler extends View {
         mSelectedPaint.setColor(Color.RED);
         mSelectedPaint.setAntiAlias(true);
         mSelectedPaint.setStrokeWidth(6);
+        mSelectedPaint.setTextAlign(Paint.Align.CENTER);
+        mSelectedPaint.setTextSize(dip2px(mContext, 14));
+
 
         // 选择后面的画笔
         mNonSelectedPaint = new Paint();
         mNonSelectedPaint.setColor(Color.GRAY);
         mNonSelectedPaint.setAntiAlias(true);
         mNonSelectedPaint.setStrokeWidth(2);
+        mNonSelectedPaint.setTextAlign(Paint.Align.CENTER);
+        mNonSelectedPaint.setTextSize(dip2px(mContext, 14));
 
         mScroller = new OverScroller(mContext);
         mDetector = new GestureDetector(mContext, new GestureListener());
@@ -121,7 +126,7 @@ public class PulleyRuler extends View {
     }
 
     private void initData(AttributeSet attrs) {
-        mViewHeight = dip2px(mContext, 30);
+        mViewHeight = dip2px(mContext, 60);
         mScaleSpacing = dip2px(mContext, 10);
         mTextSize = dip2px(mContext, 10);
         mPeakProportion = 0.7f;
@@ -225,7 +230,8 @@ public class PulleyRuler extends View {
                 canvas.drawLine(point, mBottomLine - mPeakLineHeight,
                         point, mBottomLine,
                         paint);
-                drawRuleNum(canvas, 0, 0);
+                drawRuleNum(canvas, point, mBottomLine - mPeakLineHeight - dip2px(mContext, 2),
+                        scale + "", paint);
             } else {
                 canvas.drawLine(point, mBottomLine - mCompanyHeight,
                         point, mBottomLine,
@@ -244,9 +250,10 @@ public class PulleyRuler extends View {
      * @param canvas
      * @param x
      * @param y
+     * @param paint
      */
-    private void drawRuleNum(Canvas canvas, int x, int y) {
-
+    private void drawRuleNum(Canvas canvas, int x, int y, String value, Paint paint) {
+        canvas.drawText(value, x, y, paint);
     }
 
     private void changeRulePosition(int ruleBgn) {
