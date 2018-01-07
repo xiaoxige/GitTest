@@ -122,7 +122,7 @@ public class PulleyRuler extends View {
 
     private void initData(AttributeSet attrs) {
         mViewHeight = dip2px(mContext, 30);
-        mScaleSpacing = dip2px(mContext, 4);
+        mScaleSpacing = dip2px(mContext, 10);
         mTextSize = dip2px(mContext, 10);
         mPeakProportion = 0.7f;
         mCompanyProportion = 0.3f;
@@ -258,7 +258,7 @@ public class PulleyRuler extends View {
     private void adjustmentProgress() {
         int dis = mViewCore - mStartingPoint;
         int progress = dis / mScaleSpacing;
-        changeRulePosition(mViewCore - progress * mScaleSpacing);
+//        changeRulePosition(mViewCore - progress * mScaleSpacing);
         if (mCallback != null) {
             mCallback.ruleChanged(PulleyRuler.this, (progress * mCompanyScale + mBgnScale));
         }
@@ -314,6 +314,10 @@ public class PulleyRuler extends View {
             changeRulePosition(mScroller.getCurrX());
             invalidate();
         }
+    }
+
+    public void setCallback(OnRuleCallback callback) {
+        this.mCallback = callback;
     }
 
     public interface OnRuleCallback {

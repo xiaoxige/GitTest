@@ -24,6 +24,7 @@
 
 
     <cn.xiaoxige.a2018_1_6demo.PulleyRuler
+        android:id="@+id/pulleyRuler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
