@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pointerProgress.setProgress(pointerProgress.getProgress() - 30, true);
+                pointerProgress.setProgress(pointerProgress.getProgress() - 30, false);
             }
         });
     }

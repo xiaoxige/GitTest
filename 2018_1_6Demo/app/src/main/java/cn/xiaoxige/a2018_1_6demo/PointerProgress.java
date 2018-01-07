@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 /**
  * Created by zhuxiaoan on 2018/1/6.
+ * 带有指示进度的进度条
  */
 
 public class PointerProgress extends LinearLayout {
