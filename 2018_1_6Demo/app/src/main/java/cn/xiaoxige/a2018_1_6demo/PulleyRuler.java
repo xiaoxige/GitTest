@@ -219,22 +219,23 @@ public class PulleyRuler extends View {
     }
 
     private void drawRule(Canvas canvas) {
-
+        Paint paint;
         for (int scale = mBgnScale, point = mStartingPoint;
              scale <= mEndScale && point <= mEndPoint;
              scale += mCompanyScale, point += mScaleSpacing) {
+            paint = point <= mViewCore ? mSelectedPaint : mNonSelectedPaint;
             // 开始、结束、一次峰值
             if (scale == mBgnScale || scale == mEndScale || (mBgnScale - scale) % mCompanyPeak == 0) {
                 canvas.drawLine(point, mBottomLine - mPeakLineHeight,
                         point, mBottomLine,
-                        mNonSelectedPaint);
+                        paint);
             } else {
                 canvas.drawLine(point, mBottomLine - mCompanyHeight,
                         point, mBottomLine,
-                        mNonSelectedPaint);
+                        paint);
             }
             if (scale != mEndScale) {
-                canvas.drawLine(point, mBottomLine, point + mScaleSpacing, mBottomLine, mNonSelectedPaint);
+                canvas.drawLine(point, mBottomLine, point + mScaleSpacing, mBottomLine, paint);
             }
         }
 
