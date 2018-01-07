@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:PulleyRuler="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -26,6 +27,15 @@
     <cn.xiaoxige.a2018_1_6demo.PulleyRuler
         android:id="@+id/pulleyRuler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        PulleyRuler:BgnScale="3000"
+        PulleyRuler:CompanyPeak="1000"
+        PulleyRuler:CompanyProportion="0.3"
+        PulleyRuler:CompanyScale="100"
+        PulleyRuler:EndScale="10000"
+        PulleyRuler:PeakProportion="0.7"
+        PulleyRuler:ScaleSpacing="10dp"
+        PulleyRuler:TextSize="6sp"
+        />
 
 </LinearLayout>

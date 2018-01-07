@@ -1,6 +1,7 @@
 package cn.xiaoxige.a2018_1_6demo;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -50,11 +51,8 @@ public class PulleyRuler extends View {
      */
     private int mEndScale;
     /**
-     * 当前进度
+     * 文字大小
      */
-    private int mScale;
-
-    // TODO: 2018/1/7 暂不考虑
     private int mTextSize;
 
     /**
@@ -109,7 +107,6 @@ public class PulleyRuler extends View {
         mSelectedPaint.setAntiAlias(true);
         mSelectedPaint.setStrokeWidth(6);
         mSelectedPaint.setTextAlign(Paint.Align.CENTER);
-        mSelectedPaint.setTextSize(dip2px(mContext, 14));
 
 
         // 选择后面的画笔
@@ -118,7 +115,6 @@ public class PulleyRuler extends View {
         mNonSelectedPaint.setAntiAlias(true);
         mNonSelectedPaint.setStrokeWidth(2);
         mNonSelectedPaint.setTextAlign(Paint.Align.CENTER);
-        mNonSelectedPaint.setTextSize(dip2px(mContext, 14));
 
         mScroller = new OverScroller(mContext);
         mDetector = new GestureDetector(mContext, new GestureListener());
@@ -127,15 +123,27 @@ public class PulleyRuler extends View {
 
     private void initData(AttributeSet attrs) {
         mViewHeight = dip2px(mContext, 60);
-        mScaleSpacing = dip2px(mContext, 10);
-        mTextSize = dip2px(mContext, 10);
-        mPeakProportion = 0.7f;
-        mCompanyProportion = 0.3f;
-        mCompanyPeak = 10;
-        mCompanyScale = 1;
-        mBgnScale = 0;
-        mEndScale = 100;
-        mScale = 0;
+//        mScaleSpacing = dip2px(mContext, 10);
+//        mTextSize = dip2px(mContext, 14);
+//        mPeakProportion = 0.7f;
+//        mCompanyProportion = 0.3f;
+//        mCompanyPeak = 10;
+//        mCompanyScale = 1;
+//        mBgnScale = 0;
+//        mEndScale = 100;
+
+        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.PulleyRuler);
+        mScaleSpacing = (int) typedArray.getDimension(R.styleable.PulleyRuler_ScaleSpacing, dip2px(mContext, 10));
+        mTextSize = (int) typedArray.getDimension(R.styleable.PulleyRuler_TextSize, dip2px(mContext, 8));
+        mPeakProportion = typedArray.getFloat(R.styleable.PulleyRuler_PeakProportion, 0.7f);
+        mCompanyProportion = typedArray.getFloat(R.styleable.PulleyRuler_CompanyProportion, 0.3f);
+        mCompanyPeak = typedArray.getInt(R.styleable.PulleyRuler_CompanyPeak, 10);
+        mCompanyScale = typedArray.getInt(R.styleable.PulleyRuler_CompanyScale, 1);
+        mBgnScale = typedArray.getInt(R.styleable.PulleyRuler_BgnScale, 0);
+        mEndScale = typedArray.getInt(R.styleable.PulleyRuler_EndScale, 100);
+        typedArray.recycle();
+        mSelectedPaint.setTextSize(dip2px(mContext, mTextSize));
+        mNonSelectedPaint.setTextSize(dip2px(mContext, mTextSize));
     }
 
     @Override
@@ -205,6 +213,46 @@ public class PulleyRuler extends View {
     }
 
     /**
+     * 设置单位刻度
+     *
+     * @param companyScale
+     */
+    public void setCompanyScale(int companyScale) {
+        this.mCompanyScale = companyScale;
+        invalidate();
+    }
+
+    /**
+     * 设置单位峰值
+     *
+     * @param companyPeak
+     */
+    public void setCompanyPeak(int companyPeak) {
+        this.mCompanyPeak = companyPeak;
+        invalidate();
+    }
+
+    /**
+     * 设置起始值
+     *
+     * @param bgnScale
+     */
+    public void setBgnScale(int bgnScale) {
+        this.mBgnScale = bgnScale;
+        invalidate();
+    }
+
+    /**
+     * 设置结束值
+     *
+     * @param endScale
+     */
+    public void setEndScale(int endScale) {
+        this.mEndScale = endScale;
+        invalidate();
+    }
+
+    /**
      * 指针
      *
      * @param canvas
@@ -230,6 +278,7 @@ public class PulleyRuler extends View {
                 canvas.drawLine(point, mBottomLine - mPeakLineHeight,
                         point, mBottomLine,
                         paint);
+                // 只有峰值才去设置数字
                 drawRuleNum(canvas, point, mBottomLine - mPeakLineHeight - dip2px(mContext, 2),
                         scale + "", paint);
             } else {

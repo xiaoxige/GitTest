@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PulleyRuler">
+
+        <!--间距-->
+        <attr name="ScaleSpacing" format="dimension|reference" />
+        <!--文字大小-->
+        <attr name="TextSize" format="dimension|reference" />
+        <!--峰值线的比例-->
+        <attr name="PeakProportion" format="float" />
+        <!--单位线比例-->
+        <attr name="CompanyProportion" format="float" />
+        <!--单位峰值-->
+        <attr name="CompanyPeak" format="integer" />
+        <!--单位值-->
+        <attr name="CompanyScale" format="integer" />
+        <!--直尺的开始值-->
+        <attr name="BgnScale" format="integer" />
+        <!--直尺的结束值-->
+        <attr name="EndScale" format="integer" />
+
+    </declare-styleable>
+
+</resources>

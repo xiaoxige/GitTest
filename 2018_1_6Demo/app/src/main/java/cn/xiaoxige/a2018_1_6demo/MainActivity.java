@@ -42,5 +42,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        pulleyRuler.setBgnScale(60);
+
     }
 }
