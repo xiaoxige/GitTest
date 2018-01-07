@@ -6,10 +6,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.OverScroller;
 
 /**
  * Created by zhuxiaoan on 2018/1/7.
@@ -75,6 +75,7 @@ public class PulleyRuler extends View {
     private float mPeakProportion;
     private float mCompanyProportion;
 
+    private OverScroller mScroller;
     private GestureDetector mDetector;
 
     public PulleyRuler(Context context) {
@@ -111,6 +112,9 @@ public class PulleyRuler extends View {
         mNonSelectedPaint.setColor(Color.GRAY);
         mNonSelectedPaint.setAntiAlias(true);
         mNonSelectedPaint.setStrokeWidth(2);
+
+        mScroller = new OverScroller(mContext);
+        mDetector = new GestureDetector(mContext, new GestureListener());
 
     }
 
@@ -179,35 +183,16 @@ public class PulleyRuler extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.e("TAG", "峰值线的高度 = " + mPeakLineHeight +
-                ", " + "单位线高度 = " + mCompanyHeight +
-                ", " + "开始话的起点 = " + mStartingPoint);
-
         // 画中心指针
         drawCorePoint(canvas);
         drawRule(canvas);
 
     }
 
-    private float mStartX;
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
-//        mDetector.onTouchEvent(event);
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mStartX = event.getX();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                float endX = event.getX();
-                changeRulePosition(mStartingPoint + (int) (endX - mStartX));
-                mStartX = endX;
-                invalidate();
-                break;
-            case MotionEvent.ACTION_UP:
-                break;
-        }
+        mDetector.onTouchEvent(event);
         return true;
     }
 
@@ -273,5 +258,49 @@ public class PulleyRuler extends View {
     private int dip2px(Context context, float dpValue) {
         float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+
+    private class GestureListener implements GestureDetector.OnGestureListener {
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public void onShowPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            changeRulePosition((int) (mStartingPoint - distanceX));
+            invalidate();
+            return true;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            mScroller.fling(mStartingPoint, 0, (int) velocityX / 10, 0, mViewCore - mRuleWidth, mViewCore, 0, 0);
+            return true;
+        }
+    }
+
+    @Override
+    public void computeScroll() {
+        super.computeScroll();
+        if (mScroller.computeScrollOffset()) {
+            changeRulePosition(mScroller.getCurrX());
+            invalidate();
+        }
     }
 }
