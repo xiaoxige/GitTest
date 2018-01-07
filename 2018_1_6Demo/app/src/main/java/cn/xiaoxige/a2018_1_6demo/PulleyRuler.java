@@ -136,7 +136,9 @@ public class PulleyRuler extends View {
         mScaleSpacing = (int) typedArray.getDimension(R.styleable.PulleyRuler_ScaleSpacing, dip2px(mContext, 10));
         mTextSize = (int) typedArray.getDimension(R.styleable.PulleyRuler_TextSize, dip2px(mContext, 8));
         mPeakProportion = typedArray.getFloat(R.styleable.PulleyRuler_PeakProportion, 0.7f);
+        mPeakProportion = Math.min(1, Math.max(mPeakProportion, 0));
         mCompanyProportion = typedArray.getFloat(R.styleable.PulleyRuler_CompanyProportion, 0.3f);
+        mCompanyProportion = Math.min(1, Math.max(mCompanyProportion, 0));
         mCompanyPeak = typedArray.getInt(R.styleable.PulleyRuler_CompanyPeak, 10);
         mCompanyScale = typedArray.getInt(R.styleable.PulleyRuler_CompanyScale, 1);
         mBgnScale = typedArray.getInt(R.styleable.PulleyRuler_BgnScale, 0);
@@ -153,7 +155,7 @@ public class PulleyRuler extends View {
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         mViewWidth = MeasureSpec.getSize(widthMeasureSpec);
         /**
-         * 为了确定中心点， 所以view的宽地不能空
+         * 为了确定中心点， 所以view的宽不能空
          */
         if (widthMode != MeasureSpec.EXACTLY) {
             throw new RuntimeException("pulleyRuler'width must be sure...");
