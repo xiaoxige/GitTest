@@ -1,0 +1,9 @@
+<resources>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="cube_views_load_more_loading">加载中...</string>
+    <string name="cube_views_load_more_loaded_empty">加载数据为空</string>
+    <string name="cube_views_load_more_loaded_no_more">没有更多数据了</string>
+    <string name="cube_views_load_more_click_to_load_more">点击重新加载</string>
+    <string name="cube_views_load_more_error">加载失败了，点击重新加载</string>
+</resources>

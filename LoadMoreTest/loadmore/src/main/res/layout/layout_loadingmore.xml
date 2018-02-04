@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:wheel="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/loadmore_bgcolor">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <in.srain.cube.ultra.loadmore.utils.ProgressWheel
+            android:id="@+id/progress_wheel"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            wheel:matProg_barColor="@color/progress_color"
+            wheel:matProg_barWidth="2dp"
+            wheel:matProg_progressIndeterminate="true"/>
+
+        <TextView
+            android:id="@+id/loading_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/loadmore_fgcolor"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</RelativeLayout>

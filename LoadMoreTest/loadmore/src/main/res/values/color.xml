@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="progress_color">#5faee3</color>
+    <color name="loadmore_bgcolor">#f4f4f4</color>
+    <color name="loadmore_fgcolor">#999999</color>
+</resources>
