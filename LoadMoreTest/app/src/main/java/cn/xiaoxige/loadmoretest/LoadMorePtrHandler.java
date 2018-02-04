@@ -15,6 +15,7 @@ public abstract class LoadMorePtrHandler implements PtrHandler {
 
     @Override
     public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+//        LoadMoreLayout loadMoreLayout = (LoadMoreLayout) frame.getChildAt(0);
         LoadMoreRecylerContainer loadMoreLayout = (LoadMoreRecylerContainer) frame.getChildAt(0);
         RecyclerView recyclerView = (RecyclerView) loadMoreLayout.getChildAt(0);
 //        LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();

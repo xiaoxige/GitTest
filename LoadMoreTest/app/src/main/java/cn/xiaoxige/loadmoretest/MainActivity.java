@@ -3,8 +3,9 @@ package cn.xiaoxige.loadmoretest;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import in.srain.cube.ultra.loadmore.recylerview.LoadMoreContainerRecyler;
 import in.srain.cube.ultra.loadmore.recylerview.LoadMoreRecylerContainer;
@@ -52,6 +53,18 @@ public class MainActivity extends Activity {
                 }, 2000);
             }
         });
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                int i = recyclerView.computeVerticalScrollRange();
+                int i1 = recyclerView.computeVerticalScrollExtent();
+                int i2 = recyclerView.computeVerticalScrollOffset();
+                Log.e("TAG", "" + i + ", " + i1 + ", " + i2);
+            }
+        });
+
     }
 
     private void initData() {
@@ -63,8 +76,8 @@ public class MainActivity extends Activity {
         refreshLayout = (PtrClassicFrameLayout) findViewById(R.id.refreshLayout);
         loadMoreLayout = (LoadMoreRecylerContainer) findViewById(R.id.loadMoreLayout);
         mAdapter = new MyAdapter(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-//        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         recyclerView.setAdapter(mAdapter);
     }
 }

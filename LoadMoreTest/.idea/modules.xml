@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/LoadMoreTest.iml" filepath="$PROJECT_DIR$/LoadMoreTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/loadmore/loadmore.iml" filepath="$PROJECT_DIR$/loadmore/loadmore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xxg_loadmore/xxg_loadmore.iml" filepath="$PROJECT_DIR$/xxg_loadmore/xxg_loadmore.iml" />
     </modules>
   </component>
 </project>

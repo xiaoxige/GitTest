@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/loadmore" />
+            <option value="$PROJECT_DIR$/xxg_loadmore" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
