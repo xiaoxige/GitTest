@@ -1,54 +1,43 @@
 package cn.xiaoxige.moveview;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextSwitcher;
+import android.widget.Button;
 import android.widget.Toast;
 
-import cn.xiaoxige.moveview.view.BaseEditView;
+import cn.xiaoxige.moveview.view.ScratchView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
-    private EditView viewFirst;
-    private EditView viewSecond;
-
+    private ScratchView svScratchCard;
+    private Button btnReset;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewFirst = (EditView) findViewById(R.id.viewFirst);
-        viewSecond = (EditView) findViewById(R.id.viewSecond);
+        svScratchCard = (ScratchView)findViewById(R.id.svScratchCard);
+        btnReset = (Button)findViewById(R.id.btnReset);
 
-        viewFirst.setIsEditState(true);
-        viewSecond.setIsEditState(false);
+        svScratchCard.setAnswerMsg("小稀革");
+        svScratchCard.setFrontMsg("刮开有奖");
 
-        viewFirst.setMsg("剪发读卡机首付款拉的屎解放路飞机离开房间 防静电卡 发电量卡视角啦就发发大水口了附近的萨克雷锋");
-        viewSecond.setMsg("剪发读卡机首付款拉的屎解放路飞机离开房间 防静电卡 发电量卡视角啦就发发大水口了附近的萨克雷锋");
-
-        viewFirst.setCallback(new BaseEditView.OptCallback() {
+        svScratchCard.setListener(new ScratchView.onScratchListener() {
             @Override
-            public void editStateChanged(View v, boolean isEdit) {
-                Toast.makeText(MainActivity.this, "first: state=  " + isEdit, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void opt(View v, int opt) {
-                Toast.makeText(MainActivity.this, "first: clickd", Toast.LENGTH_SHORT).show();
+            public void scratched(View v, String answer) {
+                Toast.makeText(MainActivity.this, answer, Toast.LENGTH_SHORT).show();
             }
         });
 
-        viewSecond.setCallback(new BaseEditView.OptCallback() {
+        btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void editStateChanged(View v, boolean isEdit) {
-                Toast.makeText(MainActivity.this, "second: state=  " + isEdit, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void opt(View v, int opt) {
-                Toast.makeText(MainActivity.this, "second: clickd", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                svScratchCard.setAnswerMsg("呵呵呵");
+                svScratchCard.setFrontMsg("哈哈哈");
+                svScratchCard.reset();
             }
         });
+
     }
 }
