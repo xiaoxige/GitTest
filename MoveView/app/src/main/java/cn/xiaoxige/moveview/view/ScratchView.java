@@ -1,4 +1,4 @@
-package cn.xiaoxige.moveview.view;
+package com.pangpangzhu.commonlibrary.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -47,7 +47,14 @@ public class ScratchView extends View {
     private int mFontTextColor;
     private int mSensitive;
 
+    /**
+     * 是否刮卡成功
+     */
     private boolean mIsScratch;
+    /**
+     * 是否可以刮卡
+     */
+    private boolean mIsCanScratch;
     private float mX;
     private float mY;
 
@@ -77,6 +84,7 @@ public class ScratchView extends View {
         mFontBackground = Color.GRAY;
         mFontTextColor = Color.WHITE;
         mAnswerTextColor = Color.BLACK;
+        mIsCanScratch = true;
         mLinePath = new Path();
         mFontPaint = createFontPaint();
         mAnswerPaint = createAnswerPaint();
@@ -109,7 +117,7 @@ public class ScratchView extends View {
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         if (widthMode != MeasureSpec.EXACTLY || heightMode != MeasureSpec.EXACTLY) {
-            throw new RuntimeException("ScratchView'height and width is not to make clear");
+//            throw new RuntimeException("ScratchView'height and width is not to make clear");
         }
 
         mViewWidth = MeasureSpec.getSize(widthMeasureSpec);
@@ -197,6 +205,11 @@ public class ScratchView extends View {
         reset(mFontMsg);
     }
 
+    public void setIsCanScratch(boolean isCanScratch) {
+        mIsCanScratch = isCanScratch;
+        invalidate();
+    }
+
     private void drawAnswer(Canvas canvas) {
         if (!TextUtils.isEmpty(mAnswerMsg)) {
             Rect rect = new Rect();
@@ -236,6 +249,9 @@ public class ScratchView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
+        if (!mIsCanScratch) {
+            return false;
+        }
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mX = event.getX();
@@ -248,7 +264,7 @@ public class ScratchView extends View {
                 mLinePath.lineTo(mX, mY);
                 break;
             case MotionEvent.ACTION_UP:
-                if (!mIsScratch) {
+                if (!mIsScratch && mIsCanScratch) {
                     HandlerScratch();
                 }
                 break;
