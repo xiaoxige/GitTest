@@ -1,0 +1,104 @@
+onLayoutChildren
+	1. dispatchLayoutStep2
+
+dispatchLayoutStep2
+	1.onMeasure
+	2.dispatchLayout
+
+dispathchLayout
+	1.consumePendingUpdateOperations
+	2.stopInterceptRequestLayout
+	3.onLayout
+
+consumePendingUpdateOperations
+	1.scrollByInternal
+	2.focusSearch
+	3.class ViewFlinger run
+	
+	
+RecyclerView
+说白了，recyclerView就是一个自定义ViewGroup，所以也不就是这些吗？测量，摆放孩子！
+一、onMeasure{
+	1.如果layoutManager空的话，默认测量
+	2.如果layoutManager开启了自动测量{
+		1.如果是精密测试的模式的话 || 适配器为空， 直接返回了
+		2.如果现在的layoutStep == start的话， 进行处理layoutStep1()操作
+		进行layoutStap()2
+		// 现在可以去测量和得到孩子布局的宽和高
+		setMeasuredDimensionFromChildren
+		3.是否进行二次测量{
+			测量
+			layoutStap2()
+			// 现在可以去测量和得到孩子布局的宽和高
+			setMeasuredDimensionFromChildren
+		}
+	}
+	3.如果没有开启自动测量{
+		1.如果有固定大小{
+			默认测量，返回
+		}
+		2.自定义测量{
+			开始layout
+			进入layoutOrScroll
+			更新活着设置动画
+			结束layoutOrScroll
+			结束layout
+		}
+		开始layout
+		默认测量
+		结束layout
+	}
+}
+
+dispatchLaoutStep1(): 和动画相关
+dispatchLayoutStep2(): 和孩子布局相关
+setMeasuredDimensionFromChildren： 在dispatchLayoutStep2下面， 得到RecyclerView的真实大小（就是取孩子的lefe、top、right、bottom的最大值）
+
+onMeasure总结：
+	所以在自定义layoutManager中要重写onLayoutChildren, 因为不重写它， recycleView根本不知道孩子该怎么布局呢，进而也得不到recyclerView真正的高度和宽度哦， 也就计算不到自己的高度了。。。
+
+二、onLayout{
+	啊哈， 好短
+	dispatchLayout{
+		1.如果适配器或者layoutManager为空，直接返回了哦
+		2.如果layoutStep == start{
+			layoutStep1
+			layoutStep2
+		}
+		3.如果列表发生改变了， 或者是布局发生改变了{
+			layoutStep2
+		}
+		4.其他情况{
+			额外的测量（默认只是默认的测量）
+		}
+		layoutStep3
+	}
+}
+
+dispatchLaoutStep3(): 和动画相哦好像
+
+三、draw{
+	好像画间距了呀?透明度？旋转？动画？
+}
+
+四、onDraw{
+	恩， 这个肯定了， 画间距了呀哈
+}
+
+五、getViewForPosition -> tryGetViewHolderForPositionByDeadline{
+	// 这个有用了， 可以借助于这个去了解recyclerView的缓存机制（大致的吧， 恩）
+	1.如果你查询的坐标不合法 直接报异常哦！
+	2. 先尝试通过位置去scrap中去找（集合为mChangedScrap）{
+		1.通过为止去找，找到return掉
+		2.通过ID去找，找到了return掉
+		或者返回去空
+	}
+	3.如果没有在scrap中找到，就去scrap/hidden list/cache找 （集合为mAttachedScrap，mHiddenViews， mCachedViews）{
+		1.从mAttachedScrap中找
+		2.从mHiddenViews中找
+		3.从mCachedViews中找
+		4.从recyclerViewPool中找
+		5.如果都没有，那好吧，那就重新new一个吧，调用了适配器的createViewHolder
+		
+	}
+}
