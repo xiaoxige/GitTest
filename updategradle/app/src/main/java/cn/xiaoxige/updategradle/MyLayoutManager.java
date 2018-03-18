@@ -124,6 +124,7 @@ public class MyLayoutManager extends RecyclerView.LayoutManager {
 
         recyclerAndFillItems(recycler, state);
 
+
         Log.e("TAG", "" + getChildCount() + ", " +
                 mHasAttachedItems.size());
 
