@@ -85,6 +85,8 @@ public class MyLayoutManager extends RecyclerView.LayoutManager {
             childRect.bottom = getDecoratedBottom(child);
             if (!Rect.intersects(displayRect, childRect)) {
                 removeAndRecycleView(child, recycler);
+            } else {
+                detachAndScrapView(child, recycler);
             }
         }
 
@@ -122,7 +124,8 @@ public class MyLayoutManager extends RecyclerView.LayoutManager {
 
         recyclerAndFillItems(recycler, state);
 
-        Log.e("TAG", "" + getChildCount());
+        Log.e("TAG", "" + getChildCount() + ", " +
+                mHasAttachedItems.size());
 
         return travel;
     }
