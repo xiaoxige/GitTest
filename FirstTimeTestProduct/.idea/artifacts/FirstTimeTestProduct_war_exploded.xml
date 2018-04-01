@@ -1,14 +1,12 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="ssm:war exploded">
-    <output-path>$PROJECT_DIR$/target/ssm</output-path>
+  <artifact type="exploded-war" name="FirstTimeTestProduct:war exploded">
+    <output-path>$PROJECT_DIR$/target/FirstTimeTestProduct</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="ssm" />
+          <element id="module-output" name="FirstTimeTestProduct" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: junit:junit:4.11" />
-          <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.1.1" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.1.1" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.6" />
@@ -37,9 +35,9 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/ssm/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/FirstTimeTestProduct/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="ssm/web/Web" />
+      <element id="javaee-facet-resources" facet="FirstTimeTestProduct/web/Web" />
     </root>
   </artifact>
 </component>
