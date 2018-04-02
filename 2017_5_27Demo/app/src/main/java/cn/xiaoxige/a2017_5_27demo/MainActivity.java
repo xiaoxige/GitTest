@@ -93,6 +93,7 @@ public class MainActivity extends RxActivity {
         } else {
 //            publishImg();
 //            text();
+            test1();
         }
 
 //        text();
@@ -116,6 +117,30 @@ public class MainActivity extends RxActivity {
             }
         });
 
+    }
+
+    private void test1() {
+        RequestEntity entity = new RequestEntity();
+        entity.setUserName("xiaoxige");
+        entity.setUserPwd("123456");
+        entity.setNickName("zhuxiaoan");
+        NormalUseCase useCase = new NormalUseCase(new NormalRepoImpl(), entity);
+        useCase.execute(new Subscriber() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+
+            }
+        }, bindUntilEvent(ActivityEvent.DESTROY));
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

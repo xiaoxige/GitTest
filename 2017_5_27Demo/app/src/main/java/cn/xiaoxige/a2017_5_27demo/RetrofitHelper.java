@@ -1,5 +1,7 @@
 package cn.xiaoxige.a2017_5_27demo;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -26,7 +28,9 @@ public class RetrofitHelper {
         OkHttpClient client = new OkHttpClient()
                 .newBuilder()
                 .addInterceptor(new BaseInterceptor())
+                .addNetworkInterceptor(new StethoInterceptor())
                 .build();
+
 
         return client;
     }
