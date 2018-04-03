@@ -26,6 +26,10 @@
             </list>
         </property>
     </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </bean>
+
     <!-- 配置SpringMVC -->
     <!-- 1.开启SpringMVC注解模式 -->
     <!-- 简化配置：

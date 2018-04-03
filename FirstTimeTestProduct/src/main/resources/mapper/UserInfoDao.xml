@@ -8,7 +8,7 @@
     <insert id="registerUser">
 
         insert into userInfo (userName, userPwd, nickName)
-        VALUES (#{user.userName}), (#{user.userPwd}), (#{user.nickName})
+        VALUES ((#{user.userName}), (#{user.userPwd}), (#{user.nickName}))
 
     </insert>
 

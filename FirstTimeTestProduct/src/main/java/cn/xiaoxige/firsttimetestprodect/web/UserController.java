@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     UserService mUserService;
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public String register(@RequestParam("userName") String userName, @RequestParam("userPwd") String userPwd, @RequestParam("nickName") String nickName) throws Exception {
 
@@ -27,6 +27,12 @@ public class UserController {
         info.setNickName(nickName);
         int registerState = mUserService.register(info);
         return "" + registerState;
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    @ResponseBody
+    public String test(@RequestParam(value = "msg", required = false) String msg) {
+        return "数据 = " + msg;
     }
 
 }
