@@ -1,6 +1,5 @@
 package cn.xiaoxige.a2017_5_27demo;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -11,6 +10,6 @@ import retrofit2.http.POST;
 
 public interface NormalApi {
 
-    @POST("/xiaoxige/user/register")
-    Call<ResponseBody> getMsg(@Body RequestEntity entity) throws Exception;
+    @POST("/xiaoxige/user/testone")
+    Call<RequestEntity> getMsg(@Body RequestEntity entity) throws Exception;
 }
