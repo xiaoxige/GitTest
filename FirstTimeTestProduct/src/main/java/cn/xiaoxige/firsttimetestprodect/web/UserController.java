@@ -2,6 +2,7 @@ package cn.xiaoxige.firsttimetestprodect.web;
 
 import cn.xiaoxige.firsttimetestprodect.entity.UserInfo;
 import cn.xiaoxige.firsttimetestprodect.service.UserService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class UserController {
     @ResponseBody
     public String test(@RequestBody UserInfo userInfo) {
 
-        return "text";
+        return new Gson().toJson(userInfo);
     }
 
 }
