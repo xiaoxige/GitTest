@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/2017_5_29Demo.iml" filepath="$PROJECT_DIR$/2017_5_29Demo.iml" />
+      <module fileurl="file://E:\GitSpace\GitTest\2017_5_29Demo\2017_5_29Demo.iml" filepath="E:\GitSpace\GitTest\2017_5_29Demo\2017_5_29Demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://E:\GitSpace\GitTest\2017_5_29Demo\app\app.iml" filepath="E:\GitSpace\GitTest\2017_5_29Demo\app\app.iml" />
     </modules>
   </component>
 </project>
