@@ -8,15 +8,12 @@
 
     <context:component-scan base-package="cn.xiaoxige.springone.spring_mvc_web"/>
 
+    <mvc:annotation-driven/>
 
     <!--配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="suffix" value=".jsp"/>
         <property name="prefix" value="/WEB-INF/"/>
     </bean>
-
-
-    <mvc:annotation-driven/>
-
 
 </beans>
