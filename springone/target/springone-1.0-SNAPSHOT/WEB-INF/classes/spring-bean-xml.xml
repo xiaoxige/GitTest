@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:uril="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <bean class="cn.xiaoxige.springone.spring_bean_xml.Person" id="person">
+
+        <property name="name" value="小稀革"/>
+        <property name="age" value="24"/>
+
+    </bean>
+
+    <bean class="cn.xiaoxige.springone.spring_bean_xml.Person" id="person1">
+
+        <constructor-arg value="zhuxiaoan" index="0"/>
+        <constructor-arg value="24" index="1"/>
+        <property name="car">
+
+            <bean class="cn.xiaoxige.springone.spring_bean_xml.Car" p:carName="aodi" p:price="500000"/>
+
+        </property>
+
+    </bean>
+
+    <bean class="cn.xiaoxige.springone.spring_bean_xml.Person" id="person3" p:name="xiaoxige" p:age="40"/>
+
+    <bean class="cn.xiaoxige.springone.spring_bean_xml.Car" id="car">
+
+        <property name="carName" value="aodi"/>
+        <property name="price" value="100"/>
+
+    </bean>
+
+    <uril:list id="list" value-type="cn.xiaoxige.springone.spring_bean_xml.Car">
+
+        <ref bean="car"/>
+        <bean class="cn.xiaoxige.springone.spring_bean_xml.Car">
+            <property name="carName" value="xxxx"/>
+            <property name="price" value="1"/>
+        </bean>
+
+    </uril:list>
+
+
+    <bean class="cn.xiaoxige.springone.spring_bean_xml.PersonPlus" id="personPlus">
+
+        <property name="name" value="小稀革"/>
+        <property name="age" value="26"/>
+        <property name="cars" ref="list">
+            <!--<list value-type="cn.xiaoxige.springone.spring_bean_xml.Car">-->
+
+            <!--<ref bean="car"/>-->
+
+            <!--<bean class="cn.xiaoxige.springone.spring_bean_xml.Car">-->
+            <!--<property name="carName" value="xxxx"/>-->
+            <!--<property name="price" value="1"/>-->
+            <!--</bean>-->
+            <!--</list>-->
+        </property>
+
+    </bean>
+
+</beans>
