@@ -98,24 +98,24 @@ public class MainActivity extends RxActivity {
 
 //        text();
 
-        PictureConfig.getInstance().openPhoto(MainActivity.this, new PictureConfig.OnSelectResultCallback() {
-            @Override
-            public void onSelectSuccess(List<LocalMedia> list) {
-                for (LocalMedia media : list) {
-                    Log.e("TAG", "多选" + media.getPath() + ", " + media.getCompressPath());
-                }
-            }
-
-            @Override
-            public void onSelectSuccess(LocalMedia localMedia) {
-                Log.e("TAG", "单选" + localMedia.getPath() + ", " + localMedia.getCompressPath());
-                try {
-                    publicImg(localMedia.getCompressPath());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        PictureConfig.getInstance().openPhoto(MainActivity.this, new PictureConfig.OnSelectResultCallback() {
+//            @Override
+//            public void onSelectSuccess(List<LocalMedia> list) {
+//                for (LocalMedia media : list) {
+//                    Log.e("TAG", "多选" + media.getPath() + ", " + media.getCompressPath());
+//                }
+//            }
+//
+//            @Override
+//            public void onSelectSuccess(LocalMedia localMedia) {
+//                Log.e("TAG", "单选" + localMedia.getPath() + ", " + localMedia.getCompressPath());
+//                try {
+//                    publicImg(localMedia.getCompressPath());
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
     }
 
@@ -124,6 +124,7 @@ public class MainActivity extends RxActivity {
         entity.setUserName("xiaoxige");
         entity.setUserPwd("123456");
         entity.setNickName("zhuxiaoan");
+        entity.setMsg("限价房的骄傲富家大室付款就打算");
         NormalUseCase useCase = new NormalUseCase(new NormalRepoImpl(), entity);
         useCase.execute(new Subscriber() {
             @Override

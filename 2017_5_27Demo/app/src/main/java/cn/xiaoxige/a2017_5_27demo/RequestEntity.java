@@ -10,6 +10,7 @@ public class RequestEntity {
     private String userName;
     private String userPwd;
     private String nickName;
+    private String msg;
 
     public int getUserId() {
         return userId;
@@ -41,5 +42,13 @@ public class RequestEntity {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

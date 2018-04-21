@@ -15,7 +15,7 @@ public class NormalRepoImpl implements NormalRepo {
     private NormalApi mApi;
 
     public NormalRepoImpl() {
-        mApi = RetrofitHelper.getRetrofit("http://192.168.199.165:8080").create(NormalApi.class);
+        mApi = RetrofitHelper.getRetrofit("http://192.168.1.112:8080").create(NormalApi.class);
     }
 
     @Override
@@ -24,8 +24,8 @@ public class NormalRepoImpl implements NormalRepo {
             @Override
             public void call(Subscriber<? super ResponseBody> subscriber) {
                 try {
-                    ResponseBody body = OkHttpUtils.execute(mApi.getMsg(entity));
-                    Log.e("TAG", "" + body.string());
+                    RequestEntity body = OkHttpUtils.execute(mApi.getMsg(entity));
+                    Log.e("TAG", "" + body.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                     subscriber.onError(e);
