@@ -7,6 +7,9 @@
     <groupId>cn.xiaoxige</groupId>
     <artifactId>springone</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>xiaoxigeffdsaf</module>
+    </modules>
 
 
     <dependencies>
@@ -136,6 +139,6 @@
 
     </dependencies>
 
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
 </project>
