@@ -7,7 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorTransparent</item>
-
+        <item name="android:background">#efefef</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
 </resources>
