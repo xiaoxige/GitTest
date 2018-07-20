@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.saintfine.customer.test.MyAdapter;
+import com.saintfine.customer.test.MyItemDecoration;
 import com.saintfine.customer.test.R;
 
 /**
@@ -29,6 +30,9 @@ public class MyFregment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         myAdapter = new MyAdapter(getContext());
+
+        recyclerView.addItemDecoration(new MyItemDecoration());
+
         recyclerView.setAdapter(myAdapter);
 
         return view;

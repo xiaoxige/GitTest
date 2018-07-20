@@ -7,9 +7,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.saintfine.customer.test.R;
+import com.saintfine.customer.test.aop.DontBlockFastClick;
 import com.saintfine.customer.test.example.MyFregment;
 import com.saintfine.customer.test.example.MyViewPagerAdapter;
 
@@ -26,6 +30,7 @@ public class PrimordialActivity extends FragmentActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FrameLayout flTitleContailer;
+    private TextView tvBanner;
 
     private MyViewPagerAdapter myViewPagerAdapter;
 
@@ -52,6 +57,7 @@ public class PrimordialActivity extends FragmentActivity {
         myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(), titles, fragments);
         viewPager.setAdapter(myViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        tvBanner = (TextView) findViewById(R.id.tvBanner);
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -64,9 +70,17 @@ public class PrimordialActivity extends FragmentActivity {
                 float v = (float) verticalOffset / canScrollheight;
                 flTitleContailer.getChildAt(0).setAlpha(v);
             }
+
         });
 
+        tvBanner.setOnClickListener(new View.OnClickListener() {
 
+            @DontBlockFastClick
+            @Override
+            public void onClick(View v) {
+                Log.e("TAG", "fjdasfkljjjjjdlasf");
+            }
+        });
     }
 
 }
