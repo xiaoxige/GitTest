@@ -7,3 +7,7 @@
 /build
 /captures
 .externalNativeBuild
+/.gradle/
+/.idea/
+app/src/main/java/com/saintfine/customer/test/test/
+/build/
