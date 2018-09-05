@@ -5,8 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.NestedScrollingChild;
 import android.support.v4.view.NestedScrollingChildHelper;
+import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
 public class XiaoxigeOneView extends ViewGroup implements NestedScrollingChild {
@@ -72,21 +75,73 @@ public class XiaoxigeOneView extends ViewGroup implements NestedScrollingChild {
         mSecondView.layout(0, mFirstViewHeight - mMoveY, mRootWidth, mMaxRootViewHeight - mMoveY);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public boolean dispatchNestedPreScroll(int dx, int dy, @Nullable int[] consumed, @Nullable int[] offsetInWindow) {
-        if (!isUpTelescopic()) {
-            if (dy <= mMoveY) {
-                mMoveY += dy;
-                consumed[1] = dy;
-                requestLayout();
-            }
+//        if (!isUpTelescopic()) {
+//            if (dy <= mMoveY) {
+//                mMoveY += dy;
+//                consumed[1] = dy;
+//                requestLayout();
+//            }
+//
+//        }
 
+        // 是否可以伸缩
+        int beforeMoveY = mMoveY;
+        if (Math.abs(dy) > 0 && isTelescopic()) {
+            if (dy > 0) {
+                // 上 +
+                int tempResult = mMoveY + dy;
+                mMoveY = Math.min(tempResult, mFirstViewHeight);
+//                dy = tempResult - mMoveY;
+//                consumed[1] = dy == beforeDy ? 0 : dy;
+                consumed[1] = mMoveY - beforeMoveY;
+            } else {
+                // 下 -
+                // 转正
+                dy = Math.abs(dy);
+                int tempResult = mMoveY - dy;
+                mMoveY = Math.max(tempResult, 0);
+//                dy = mMoveY - tempResult;
+                // 还原
+//                dy = -dy;
+//                consumed[1] = dy == beforeDy ? 0 : dy;
+                consumed[1] = mMoveY - beforeMoveY;
+            }
         }
-        return this.mScrollingChildHelper.dispatchNestedPreScroll(dx, dy, consumed, null);
+
+        // 分发进度
+        dispatchTransparency();
+
+        if (beforeMoveY != mMoveY) {
+            requestLayout();
+        }
+
+//        return this.mScrollingChildHelper.dispatchNestedPreScroll(dx, dy, consumed, null);
+
+        return super.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow);
     }
 
-    private boolean isUpTelescopic() {
-        return mMoveY >= mFirstViewHeight;
+    private void dispatchTransparency() {
+        float progress = ((float) mMoveY) / mFirstViewHeight;
+        mFirstView.setAlpha(1 - progress);
+    }
+
+    /**
+     * 是否可伸缩
+     *
+     * @return
+     */
+    private boolean isTelescopic() {
+//        if (dy > 0) {
+//            // 上 +
+//            return mMoveY < mFirstViewHeight;
+//        } else {
+//            // 下 -
+//            return mMoveY > 0;
+//        }
+        return mMoveY <= mFirstViewHeight && mMoveY >= 0;
     }
 
 }

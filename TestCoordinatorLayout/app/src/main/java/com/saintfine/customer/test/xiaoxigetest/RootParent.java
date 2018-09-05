@@ -6,7 +6,10 @@ import android.support.v4.view.NestedScrollingChild;
 import android.support.v4.view.NestedScrollingParent;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 public class RootParent extends LinearLayout implements NestedScrollingParent {
@@ -37,24 +40,66 @@ public class RootParent extends LinearLayout implements NestedScrollingParent {
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
         super.onNestedPreScroll(target, dx, dy, consumed);
-
+        // dy 上 +， 下 -
         int childCount = getChildCount();
-        View childView;
-        for (int index = 0; index < childCount; index++) {
-            childView = getChildAt(index);
-            if (childView.equals(target)) {
-                continue;
-            }
-            if (childView instanceof NestedScrollingChild) {
-                int[] food = new int[2];
-                ((NestedScrollingChild) childView).dispatchNestedPreScroll(dx, dy, food, null);
+//        if (dy > 0) {
+        if (false) {
+            // 上（从后向前通知）+
+            for (int index = childCount - 1; index >= 0; index--) {
+                int[] food = infiltration(getChildAt(index), target, dx, dy);
                 int consumptionX = food[0];
                 int consumptionY = food[1];
-                consumed[0] += consumptionX;
-                consumed[1] += consumptionY;
                 dx -= consumptionX;
                 dy -= consumptionY;
+                consumed[0] += consumptionX;
+                consumed[1] += consumptionY;
+            }
+        } else {
+            // 下（从前向后通知）-
+            for (int index = 0; index < childCount; index++) {
+                int[] food = infiltration(getChildAt(index), target, dx, dy);
+                int consumptionX = food[0];
+                int consumptionY = food[1];
+                dx -= consumptionX;
+                dy -= consumptionY;
+                consumed[0] += consumptionX;
+                consumed[1] += consumptionY;
             }
         }
+        Log.e("TAG", "target = " + target + "consumed[1] = " + consumed[1]);
+//        for (int index = 0; index < childCount; index++) {
+//            childView = getChildAt(index);
+//            if (childView.equals(target)) {
+//                continue;
+//            }
+//            if (childView instanceof NestedScrollingChild) {
+//                int[] food = new int[2];
+//                ((NestedScrollingChild) childView).dispatchNestedPreScroll(dx, dy, food, null);
+//                int consumptionX = food[0];
+//                int consumptionY = food[1];
+//                consumed[0] += consumptionX;
+//                consumed[1] += consumptionY;
+//                dx -= consumptionX;
+//                dy -= consumptionY;
+//            }
+//        }
+    }
+
+    /**
+     * 渗透给View，让其自己确定是否消费以及消费多少
+     *
+     * @param childView
+     * @param dx
+     * @param dy
+     * @return
+     */
+    private int[] infiltration(View childView, View targetView, int dx, int dy) {
+        int[] food = {
+                0, 0
+        };
+        if (!targetView.equals(childView) && childView instanceof NestedScrollingChild) {
+            ((NestedScrollingChild) childView).dispatchNestedPreScroll(dx, dy, food, null);
+        }
+        return food;
     }
 }
