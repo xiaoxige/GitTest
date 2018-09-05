@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="标题" />
+
+    <com.saintfine.customer.test.xiaoxigetest.RootParent
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#efefef">
+
+        <com.saintfine.customer.test.xiaoxigetest.XiaoxigeOneView
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="one" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="two" />
+
+        </com.saintfine.customer.test.xiaoxigetest.XiaoxigeOneView>
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#ffff00"
+                    android:gravity="center"
+                    android:text="1" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#ffff00"
+                    android:gravity="center"
+                    android:text="2" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#ffff00"
+                    android:gravity="center"
+                    android:text="3" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#ffff00"
+                    android:gravity="center"
+                    android:text="4" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#ffff00"
+                    android:gravity="center"
+                    android:text="5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#ffff00"
+                    android:gravity="center"
+                    android:text="6" />
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </com.saintfine.customer.test.xiaoxigetest.RootParent>
+
+
+</LinearLayout>
