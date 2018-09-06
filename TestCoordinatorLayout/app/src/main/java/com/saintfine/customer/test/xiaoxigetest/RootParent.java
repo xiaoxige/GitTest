@@ -40,10 +40,11 @@ public class RootParent extends LinearLayout implements NestedScrollingParent {
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
         super.onNestedPreScroll(target, dx, dy, consumed);
+
         // dy 上 +， 下 -
         int childCount = getChildCount();
-//        if (dy > 0) {
-        if (false) {
+        if (dy > 0) {
+//        if (false) {
             // 上（从后向前通知）+
             for (int index = childCount - 1; index >= 0; index--) {
                 int[] food = infiltration(getChildAt(index), target, dx, dy);
@@ -53,6 +54,9 @@ public class RootParent extends LinearLayout implements NestedScrollingParent {
                 dy -= consumptionY;
                 consumed[0] += consumptionX;
                 consumed[1] += consumptionY;
+                if (dy <= 0) {
+                    break;
+                }
             }
         } else {
             // 下（从前向后通知）-
@@ -64,9 +68,12 @@ public class RootParent extends LinearLayout implements NestedScrollingParent {
                 dy -= consumptionY;
                 consumed[0] += consumptionX;
                 consumed[1] += consumptionY;
+                if (dy >= 0) {
+                    break;
+                }
             }
         }
-        Log.e("TAG", "target = " + target + "consumed[1] = " + consumed[1]);
+//        Log.e("TAG", "target = " + target + "consumed[1] = " + consumed[1]);
 //        for (int index = 0; index < childCount; index++) {
 //            childView = getChildAt(index);
 //            if (childView.equals(target)) {
@@ -97,9 +104,34 @@ public class RootParent extends LinearLayout implements NestedScrollingParent {
         int[] food = {
                 0, 0
         };
-        if (!targetView.equals(childView) && childView instanceof NestedScrollingChild) {
-            ((NestedScrollingChild) childView).dispatchNestedPreScroll(dx, dy, food, null);
-        }
+        infiltration(childView, targetView, dx, dy, food);
         return food;
+    }
+
+    private void infiltration(View childView, View targetView, int dx, int dy, int[] consumed) {
+        if (!targetView.equals(childView) && childView instanceof NestedScrollingChild) {
+            int[] food = new int[2];
+            ((NestedScrollingChild) childView).dispatchNestedPreScroll(dx, dy, food, null);
+            int consumptionX = food[0];
+            int consumptionY = food[1];
+            dx -= consumptionX;
+            dy -= consumptionY;
+            consumed[0] += consumptionX;
+            consumed[1] += consumptionY;
+        }
+
+        if (childView instanceof ViewGroup) {
+            int childCount = ((ViewGroup) childView).getChildCount();
+            if (dy > 0) {
+                for (int index = childCount - 1; index >= 0; index--) {
+                    infiltration(((ViewGroup) childView).getChildAt(index), targetView, dx, dy, consumed);
+                }
+            } else {
+                for (int index = 0; index < childCount; index++) {
+                    infiltration(((ViewGroup) childView).getChildAt(index), targetView, dx, dy, consumed);
+                }
+            }
+        }
+
     }
 }

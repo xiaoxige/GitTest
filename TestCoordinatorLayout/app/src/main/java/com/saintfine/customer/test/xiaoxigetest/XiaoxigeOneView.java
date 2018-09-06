@@ -25,6 +25,8 @@ public class XiaoxigeOneView extends ViewGroup implements NestedScrollingChild {
     private int mMaxRootViewHeight;
     private int mMoveY;
 
+    private OnProgressListener mProgressListener;
+
     private NestedScrollingChildHelper mScrollingChildHelper;
 
     public XiaoxigeOneView(@NonNull Context context) {
@@ -126,6 +128,9 @@ public class XiaoxigeOneView extends ViewGroup implements NestedScrollingChild {
     private void dispatchTransparency() {
         float progress = ((float) mMoveY) / mFirstViewHeight;
         mFirstView.setAlpha(1 - progress);
+        if (mProgressListener != null) {
+            mProgressListener.progressChanged(this, progress);
+        }
     }
 
     /**
@@ -142,6 +147,14 @@ public class XiaoxigeOneView extends ViewGroup implements NestedScrollingChild {
 //            return mMoveY > 0;
 //        }
         return mMoveY <= mFirstViewHeight && mMoveY >= 0;
+    }
+
+    public void setProgressListener(OnProgressListener progressListener) {
+        this.mProgressListener = progressListener;
+    }
+
+    public interface OnProgressListener {
+        void progressChanged(View v, float progress);
     }
 
 }
