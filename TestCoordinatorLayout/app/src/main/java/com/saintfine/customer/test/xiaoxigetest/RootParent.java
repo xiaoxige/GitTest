@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.NestedScrollingChild;
 import android.support.v4.view.NestedScrollingParent;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -40,7 +41,7 @@ public class RootParent extends LinearLayout implements NestedScrollingParent {
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
         super.onNestedPreScroll(target, dx, dy, consumed);
-
+        Log.e("TAG", "target = " + target + "dy = " + dy);
         // dy 上 +， 下 -
         int childCount = getChildCount();
         if (dy > 0) {
@@ -73,6 +74,7 @@ public class RootParent extends LinearLayout implements NestedScrollingParent {
                 }
             }
         }
+        Log.e("TAG", "target = " + target + "dy = " + dy + ", consumed[1] = " + consumed[1]);
 //        Log.e("TAG", "target = " + target + "consumed[1] = " + consumed[1]);
 //        for (int index = 0; index < childCount; index++) {
 //            childView = getChildAt(index);

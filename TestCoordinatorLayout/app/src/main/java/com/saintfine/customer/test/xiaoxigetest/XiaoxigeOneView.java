@@ -77,6 +77,15 @@ public class XiaoxigeOneView extends ViewGroup implements NestedScrollingChild {
         mSecondView.layout(0, mFirstViewHeight - mMoveY, mRootWidth, mMaxRootViewHeight - mMoveY);
     }
 
+    /**
+     * 改方法会有好多重复的代码， 不在合并了， 感觉这样好理解点
+     *
+     * @param dx
+     * @param dy
+     * @param consumed
+     * @param offsetInWindow
+     * @return
+     */
     @SuppressWarnings("ConstantConditions")
     @Override
     public boolean dispatchNestedPreScroll(int dx, int dy, @Nullable int[] consumed, @Nullable int[] offsetInWindow) {
