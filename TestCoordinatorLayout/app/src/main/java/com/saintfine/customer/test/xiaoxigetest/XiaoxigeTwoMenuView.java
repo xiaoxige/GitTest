@@ -160,7 +160,7 @@ public class XiaoxigeTwoMenuView extends ViewGroup implements NestedScrollingChi
                 for (int i = 0; i < size; i++) {
                     menuItem = mMenuItems.get(i);
                     float progress = ((float) mMoveY) / mCanMoveY;
-                    Log.e("TAG", "progress = " + progress);
+//                    Log.e("TAG", "progress = " + progress);
                     if (progress == 0) {
                         menuItem.currentX = menuItem.nonFoldPoint.x;
                         menuItem.currentY = menuItem.nonFoldPoint.y;
@@ -200,7 +200,7 @@ public class XiaoxigeTwoMenuView extends ViewGroup implements NestedScrollingChi
                 for (int i = 0; i < size; i++) {
                     menuItem = mMenuItems.get(i);
                     float progress = ((float) mMoveY) / mCanMoveY;
-                    Log.e("TAG", "progress = " + progress);
+//                    Log.e("TAG", "progress = " + progress);
                     if (progress == 0) {
                         menuItem.currentX = menuItem.nonFoldPoint.x;
                         menuItem.currentY = menuItem.nonFoldPoint.y;

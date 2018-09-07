@@ -41,7 +41,7 @@ public class RootParent extends LinearLayout implements NestedScrollingParent {
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
         super.onNestedPreScroll(target, dx, dy, consumed);
-        Log.e("TAG", "target = " + target + "dy = " + dy);
+        Log.e("TAG", " ~==~ target = " + target + "dy = " + dy + ", consumed[1] = " + consumed[1]);
         // dy 上 +， 下 -
         int childCount = getChildCount();
         if (dy > 0) {
@@ -92,6 +92,11 @@ public class RootParent extends LinearLayout implements NestedScrollingParent {
 //                dy -= consumptionY;
 //            }
 //        }
+    }
+
+    @Override
+    public boolean onNestedPreFling(View target, float velocityX, float velocityY) {
+        return true;
     }
 
     /**
