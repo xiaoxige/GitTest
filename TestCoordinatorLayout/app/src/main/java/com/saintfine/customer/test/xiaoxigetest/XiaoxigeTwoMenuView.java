@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.support.annotation.Nullable;
 import android.support.v4.view.NestedScrollingChild;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -152,13 +153,21 @@ public class XiaoxigeTwoMenuView extends ViewGroup implements NestedScrollingChi
                 int tempResult = mMoveY + dy;
                 mMoveY = Math.min(tempResult, mCanMoveY);
                 consumed[1] = mMoveY - beforeMoveY;
-                if (consumed[1] != 0) {
-                    // 改变子框位置（向foldPoint位置进攻）
-                    int size = mMenuItems.size();
-                    MenuItem menuItem;
-                    for (int i = 0; i < size; i++) {
-                        menuItem = mMenuItems.get(i);
-                        float progress = ((float) mMoveY) / mCanMoveY;
+//                if (consumed[1] != 0) {
+                // 改变子框位置（向foldPoint位置进攻）
+                int size = mMenuItems.size();
+                MenuItem menuItem;
+                for (int i = 0; i < size; i++) {
+                    menuItem = mMenuItems.get(i);
+                    float progress = ((float) mMoveY) / mCanMoveY;
+                    Log.e("TAG", "progress = " + progress);
+                    if (progress == 0) {
+                        menuItem.currentX = menuItem.nonFoldPoint.x;
+                        menuItem.currentY = menuItem.nonFoldPoint.y;
+                    } else if (progress == 1) {
+                        menuItem.currentX = menuItem.foldPoint.x;
+                        menuItem.currentY = menuItem.foldPoint.y;
+                    } else {
                         // 应该现在移动位置距离
                         float x = menuItem.getCanGlidingX() * progress;
                         float y = menuItem.getCanGlidingY() * progress;
@@ -176,6 +185,7 @@ public class XiaoxigeTwoMenuView extends ViewGroup implements NestedScrollingChi
                         }
                     }
                 }
+//                }
             } else {
                 // 下 -
                 // 改变父框大小（向nonFoldPoint位置进攻）
@@ -183,13 +193,21 @@ public class XiaoxigeTwoMenuView extends ViewGroup implements NestedScrollingChi
                 int tempResult = mMoveY - dy;
                 mMoveY = Math.max(tempResult, 0);
                 consumed[1] = mMoveY - beforeMoveY;
-                if (consumed[1] != 0) {
-                    // 改变子框位置
-                    int size = mMenuItems.size();
-                    MenuItem menuItem;
-                    for (int i = 0; i < size; i++) {
-                        menuItem = mMenuItems.get(i);
-                        float progress = ((float) mMoveY) / mCanMoveY;
+//                if (consumed[1] != 0) {
+                // 改变子框位置
+                int size = mMenuItems.size();
+                MenuItem menuItem;
+                for (int i = 0; i < size; i++) {
+                    menuItem = mMenuItems.get(i);
+                    float progress = ((float) mMoveY) / mCanMoveY;
+                    Log.e("TAG", "progress = " + progress);
+                    if (progress == 0) {
+                        menuItem.currentX = menuItem.nonFoldPoint.x;
+                        menuItem.currentY = menuItem.nonFoldPoint.y;
+                    } else if (progress == 1) {
+                        menuItem.currentX = menuItem.foldPoint.x;
+                        menuItem.currentY = menuItem.foldPoint.y;
+                    } else {
                         // 应该现在移动位置距离
                         float x = menuItem.getCanGlidingX() * progress;
                         float y = menuItem.getCanGlidingY() * progress;
@@ -207,6 +225,7 @@ public class XiaoxigeTwoMenuView extends ViewGroup implements NestedScrollingChi
                         }
                     }
                 }
+//                }
             }
         }
 

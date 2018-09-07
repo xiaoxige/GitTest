@@ -11,19 +11,24 @@ import java.util.List;
 
 public class XiaoxigeActivity extends Activity {
 
-    private XiaoxigeTwoMenuView viewXiaoxigeMenuView;
+    private XiaoxigeTwoMenuView viewXiaoxigeMenuView1;
+    private XiaoxigeTwoMenuView viewXiaoxigeMenuView2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xiaoxige);
 
-        viewXiaoxigeMenuView = (XiaoxigeTwoMenuView) findViewById(R.id.viewXiaoxigeMenuView);
+        viewXiaoxigeMenuView1 = (XiaoxigeTwoMenuView) findViewById(R.id.viewXiaoxigeMenuView1);
+        viewXiaoxigeMenuView2 = (XiaoxigeTwoMenuView) findViewById(R.id.viewXiaoxigeMenuView2);
 
-        List<XiaoxigeTwoMenuView.MenuInfo> menuInfo = new ArrayList<>();
+        List<XiaoxigeTwoMenuView.MenuInfo> menuInfo1 = new ArrayList<>();
+        List<XiaoxigeTwoMenuView.MenuInfo> menuInfo2 = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            menuInfo.add(new XiaoxigeTwoMenuView.MenuInfo());
+            menuInfo1.add(new XiaoxigeTwoMenuView.MenuInfo());
+            menuInfo2.add(new XiaoxigeTwoMenuView.MenuInfo());
         }
-        viewXiaoxigeMenuView.addMenu(menuInfo, false);
+        viewXiaoxigeMenuView1.addMenu(menuInfo1, false);
+        viewXiaoxigeMenuView2.addMenu(menuInfo2, false);
     }
 }

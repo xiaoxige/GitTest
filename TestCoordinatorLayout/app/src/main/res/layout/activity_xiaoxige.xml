@@ -19,75 +19,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal">-->
-
-
-        <!--<com.saintfine.customer.test.xiaoxigetest.XiaoxigeOneView-->
-        <!--android:id="@+id/viewXiaoxigeOne"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_gravity="bottom"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:layout_weight="1">-->
-
-
-        <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/colorAccent"-->
-        <!--android:paddingBottom="10dp"-->
-        <!--android:paddingTop="10dp"-->
-        <!--android:text="one" />-->
-
-        <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:paddingBottom="10dp"-->
-        <!--android:paddingTop="10dp"-->
-        <!--android:text="two" />-->
-
-
-        <!--</com.saintfine.customer.test.xiaoxigetest.XiaoxigeOneView>-->
-
-
-        <!--<ImageView-->
-        <!--android:id="@+id/ivHead"-->
-        <!--android:layout_width="60dp"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:layout_gravity="bottom"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:background="@color/colorAccent" />-->
-
-        <!--</LinearLayout>-->
-
-
-        <com.saintfine.customer.test.xiaoxigetest.XiaoxigeOneView
+        <com.saintfine.customer.test.xiaoxigetest.XiaoxigeTwoMenuView
+            android:id="@+id/viewXiaoxigeMenuView1"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text="one" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text="two" />
-
-        </com.saintfine.customer.test.xiaoxigetest.XiaoxigeOneView>
+            android:layout_height="wrap_content" />
 
         <com.saintfine.customer.test.xiaoxigetest.XiaoxigeOneView
             android:layout_width="match_parent"
@@ -113,7 +48,7 @@
         </com.saintfine.customer.test.xiaoxigetest.XiaoxigeOneView>
 
         <com.saintfine.customer.test.xiaoxigetest.XiaoxigeTwoMenuView
-            android:id="@+id/viewXiaoxigeMenuView"
+            android:id="@+id/viewXiaoxigeMenuView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
